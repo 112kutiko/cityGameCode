@@ -9,8 +9,8 @@ public class nav_go : MonoBehaviour
     Vector3 destination;
     NavMeshAgent agent;
     bool progress=false;
-    public List<GameObject> truck_list; 
-    private int ids = 0;
+    public List<GameObject> truck_list;
+    [SerializeField] private int ids = 0;
 
 
     void Start()

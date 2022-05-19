@@ -118,6 +118,8 @@ public class main_game_controler : MonoBehaviour
               
                 currenttime = startingtime;
                 start_travel();
+                start_btn.SetActive(false);
+                shop_btn.SetActive(false);
             }
 
         }
