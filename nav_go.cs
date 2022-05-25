@@ -25,6 +25,8 @@ public class nav_go : MonoBehaviour
                 progress = false; 
                 main_game_controler.controls.selected_tag_list[0].GetComponent<house_holder>().check_by_ids(ids);
                 main_game_controler.controls.selected_tag_list.Remove(main_game_controler.controls.selected_tag_list[0]);
+                for (int i=0;i<5000;i++) { }
+                Debug.Log("counter done");
                 main_game_controler.controls.ControlerGame.setTravel(false);
             } }
     }

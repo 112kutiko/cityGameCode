@@ -91,7 +91,7 @@ public class eManager : MonoBehaviour
     }
     void park_live(int a)
     {
-        if (a < -69)
+        if (a < -99)
         {
             clearLive();
             if (negative_parks_list[2].activeSelf != true)
@@ -100,7 +100,7 @@ public class eManager : MonoBehaviour
             }
             Debug.Log("-69");
         }
-        if (a < -39)
+        if (a < -49)
         {
             clearLive();
             if (negative_parks_list[1].activeSelf != true)
@@ -126,7 +126,7 @@ public class eManager : MonoBehaviour
             }
             Debug.Log("19");
         }
-        if (a > 39) {
+        if (a > 49) {
             clearLive();
             if (parks_list[1].activeSelf != true)
             {
@@ -134,7 +134,7 @@ public class eManager : MonoBehaviour
             }
             Debug.Log("39");
         }
-        if (a > 69)
+        if (a > 99)
         {
             clearLive();
             if (parks_list[2].activeSelf != true)
@@ -143,7 +143,24 @@ public class eManager : MonoBehaviour
             }
             Debug.Log("69");
         }
-
+        if (a > 120)
+        {
+            clearLive();
+            if (parks_list[3].activeSelf != true)
+            {
+                parks_list[3].SetActive(true);
+            }
+            Debug.Log("120");
+        }
+        if (a > 180)
+        {
+            clearLive();
+            if (parks_list[4].activeSelf != true)
+            {
+                parks_list[4].SetActive(true);
+            }
+            Debug.Log("180");
+        }
     }
     void solorParks(int solor)
     {

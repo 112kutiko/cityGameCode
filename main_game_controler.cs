@@ -37,6 +37,9 @@ public class main_game_controler : MonoBehaviour
     public Text moneyText;
 
     [SerializeField] tester mainTester;
+    [Header("eco level")]
+    [SerializeField] int ecoL = 0;
+
     void Awake()
     {
      editorTester eTest = GameObject.Find("EDITOR TESTER").GetComponent<editorTester>();
@@ -190,6 +193,7 @@ public class main_game_controler : MonoBehaviour
         float t = (PlayerPrefs.GetInt("solors")/10);
         float a = (PlayerPrefs.GetInt("parks")/10);
         int u = (int)(t + a);
+        ecoL = u;
         if ((1 * u) >0.3)
         {
         my_score += u;
