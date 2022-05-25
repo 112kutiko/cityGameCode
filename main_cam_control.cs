@@ -5,19 +5,23 @@ using UnityEngine;
 public class main_cam_control : MonoBehaviour
 {
     [Header("gameobject all")]
-    public GameObject target; 
+    public GameObject target, zoom; 
     [Header("main varbles")]
     [SerializeField] private float speedMod = 150.0f;
     [SerializeField] private Vector3 point;
     [Header("phone varbles")]
     [SerializeField] Vector2 startPosition;
-    [SerializeField] Vector2 endPosition; 
-      
+    [SerializeField] Vector2 endPosition;
+    [SerializeField] float mainZoom = 60f;
+    [SerializeField] float outZoom = 33.2f;
     void Start()
     {
         point = target.transform.position; 
-        transform.LookAt(point); 
-    }
+        transform.LookAt(point);
+        if (Application.isMobilePlatform == true)
+        { zoom.SetActive(true); }
+        else { zoom.SetActive(false); }
+        }
      
     void Update()
     {
@@ -25,7 +29,12 @@ public class main_cam_control : MonoBehaviour
            
             if (Application.isMobilePlatform == false)
         {
-            if (Input.mouseScrollDelta.y == 0)
+                if (Input.GetKeyDown(KeyCode.Z)){
+                    zoomC();
+
+                }
+
+                    if (Input.mouseScrollDelta.y == 0)
             { }
             else if (Input.mouseScrollDelta.y > 0)
             {
@@ -65,5 +74,17 @@ public class main_cam_control : MonoBehaviour
     void right_()
     {
         transform.RotateAround(target.transform.position, Vector3.down, speedMod * Time.deltaTime);
+    }
+    public void zoomC()
+    {
+        float isNow = transform.gameObject.GetComponent<Camera>().fieldOfView;
+        if (isNow == outZoom)
+        {
+            transform.gameObject.GetComponent<Camera>().fieldOfView = mainZoom;
+        }
+        else
+        {
+            transform.gameObject.GetComponent<Camera>().fieldOfView = outZoom;
+        }
     }
 }

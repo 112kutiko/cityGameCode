@@ -21,11 +21,11 @@ public class eManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        clearObjects();
+        
     }
     void Start()
     {
-
+        clearObjects();
         counterUpdate();
         tmp_score = gameCompiuter.score_home();
 
@@ -64,7 +64,7 @@ public class eManager : MonoBehaviour
     {
         if (OldparkCounter!=parkCounter) {
             OldparkCounter = parkCounter;
-
+            buyParks(parkCounter);
         }
         if (OldsolorCounter != solorCounter)
         {
@@ -184,9 +184,9 @@ public class eManager : MonoBehaviour
     }
     void buyParks(int a)
     {
-        if (parksBuy_list.Count == 0 &&a<= parksBuy_list.Count) { }
+        if (a>parksBuy_list.Count ) { }
         else { 
-        for (int y = 0; y < parksBuy_list.Count; y++)
+        for (int y = 0; y < a; y++)
         {
             parksBuy_list[y].SetActive(true);
         } }

@@ -286,6 +286,7 @@ public class editorTester : MonoBehaviour
         for (int y = 0; y < ListSolarParks.Count; y++) {  ListSolarParks[y].enabled = true;  }
         for (int y = 0; y < ListBuyParks.Count; y++)  { ListBuyParks[y].enabled = true;  }
         for (int y = 0; y < ListNegativeParks.Count; y++) {  ListNegativeParks[y].enabled = true;  }
+        Debug.Log("all on renders");
     }
     public void onCanvas() { myCanvas.enabled = true;}
 } 

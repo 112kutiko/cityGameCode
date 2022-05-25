@@ -10,6 +10,7 @@ public class main_game_controler : MonoBehaviour
     public Slider GreenSlider;
     public GameObject  start_btn;
     public GameObject pauze_meniu;
+    public Text MText;
     public Text countText;
     public List<GameObject> player_tag_list;
     public List<GameObject> selected_tag_list;
@@ -25,8 +26,10 @@ public class main_game_controler : MonoBehaviour
     public Coroutine travell_=null; 
 
     [SerializeField] bool pauze;
+
     [Header("timer")]
     float currenttime = 0f;
+    [SerializeField] float timeGspeed = 2f;
     [SerializeField] float startingtime=30f;
     [Header("shop")]
     public GameObject shop_btn;
@@ -34,12 +37,15 @@ public class main_game_controler : MonoBehaviour
     public Text moneyText;
 
     [SerializeField] tester mainTester;
-
+    void Awake()
+    {
+     editorTester eTest = GameObject.Find("EDITOR TESTER").GetComponent<editorTester>();
+     eTest.enableAllRenders();
+     eTest.onCanvas();
+    }
     void Start()
     {
-        editorTester eTest = GameObject.Find("EDITOR TESTER").GetComponent<editorTester>();
-        eTest.enableAllRenders();
-        eTest.onCanvas();
+       
         currenttime = startingtime;
         controls = this;
         silders();
@@ -57,6 +63,7 @@ public class main_game_controler : MonoBehaviour
             money = 0;
             PlayerPrefs.SetInt("Money", money);
         }
+        Time.timeScale = timeGspeed;
     }
     void update2()// klavi6ai
     {
@@ -92,10 +99,12 @@ public class main_game_controler : MonoBehaviour
             Debug.Log("truck id: "+nav_go.controls.getIDS());
             Debug.Log("----------------");
         }
+        shopUpdate();
     }
-    void shopUpdate()
+    public void shopUpdate()
     {
-        moneyText.text = "money: " + PlayerPrefs.GetInt("Money");
+        moneyText.text = "" + PlayerPrefs.GetInt("Money");
+        MText.text =""+ PlayerPrefs.GetInt("Money");
     }
 
 
@@ -128,8 +137,8 @@ public class main_game_controler : MonoBehaviour
         { 
             ControlerGame.setGenerator(false);
             generate_(); 
-            Debug.Log("generuoja"); 
-
+            Debug.Log("generuoja");
+            start_btn.SetActive(true);
 
         } 
         if (ControlerGame.getStart() && ControlerGame.getLive() == true)
@@ -172,8 +181,8 @@ public class main_game_controler : MonoBehaviour
             new_gen(); 
             ControlerGame.setLive(true);
             ecoAdd();
-        } 
-     
+        }
+        shopUpdate();
 
     }
     public void ecoAdd()
@@ -185,7 +194,7 @@ public class main_game_controler : MonoBehaviour
         {
         my_score += u;
         }
-        
+        Debug.Log("eco: "+ u);
         silders();
     }
     public void start_travel()
@@ -218,7 +227,7 @@ public class main_game_controler : MonoBehaviour
         silders();
         if (CheckScore(i))
         {
-            addMoney(i);
+            addMoney(i*2);
         }
     }
     public void generate_() {
@@ -322,8 +331,9 @@ public class main_game_controler : MonoBehaviour
                 Debug.Log("-1 point praleistas");
             }
         }
-        if (sc != 0) { set_score(sc); 
+        if (sc < 0) { set_score(sc); 
         }
+        else if (sc == 0) { addMoney(20); }
 ControlerGame.setGenerator(true);
     }   
     public void hide_not_selected()
@@ -355,22 +365,25 @@ ControlerGame.setGenerator(true);
         else if (t < 0) { return false; }
         return false;
     }
-   
     public void addParks()
     {
-        if (money > 1000)
+        if (money >= 350)
         {
-            money -= 1000;
+            money -= 350;
             AddValue(1, "parks");
+            PlayerPrefs.SetInt("Money", money);
         }
+        shopUpdate();
     }
     public void addSolor()
     {
-        if (money > 250)
+        if (money >= 200)
         {
-            money -= 250;
+            money -= 200;
         AddValue(1, "solor");
+            PlayerPrefs.SetInt("Money", money);
         }
+        shopUpdate();
 
     }
     public void AddValue(int s, string t)
@@ -397,7 +410,7 @@ ControlerGame.setGenerator(true);
     }
     public void ResumeGame()
     {
-        Time.timeScale = 1;
+        Time.timeScale = timeGspeed;
     }
     public void exsitGame()
     {
